@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private val CUR_POS = MainActivity::class.java.name + ".cur_pos"
     private val BALANCE = MainActivity::class.java.name + ".balance"
 
-    private var parser: Parser? = null
+    private var parser: Parser = Parser()
 
     private var curInv: Boolean = false
     private var curPos: Int = 0
@@ -34,8 +34,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         expr.movementMethod = ScrollingMovementMethod();
-
-        parser = Parser()
 
         clear.setOnClickListener {
             curPos = 0
@@ -144,6 +142,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState != null) {
             curExpr = StringBuilder(savedInstanceState.getString(CUR_EXPR))
             curPos = savedInstanceState.getInt(CUR_POS)
+            balance = savedInstanceState.getInt(BALANCE)
             updateExpr()
         }
         eval()
